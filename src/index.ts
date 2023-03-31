@@ -42,9 +42,8 @@ puppeteer.use(
         },
     })
 );
-(async () => {
-    // async function checkForChanges(): Promise<void> {
-
+// (async () => {
+async function checkForChanges(): Promise<void> {
     const browser = await puppeteer.launch({
         headless: true,
     });
@@ -73,8 +72,9 @@ puppeteer.use(
     ]);
 
     await browser.close();
-})();
-// , 30000);
+}
+
+setInterval(checkForChanges, 45000);
 
 app.listen(config.server.port, () => {
     Logging.info(`Server is running on port ${config.server.port}`);
