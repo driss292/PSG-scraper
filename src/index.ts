@@ -45,7 +45,7 @@ puppeteer.use(
 // (async () => {
 async function checkForChanges(): Promise<void> {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
     });
     const page = await browser.newPage();
     await page.goto(
@@ -81,10 +81,8 @@ async function checkForChanges(): Promise<void> {
         });
 
         const mailOptions = {
-            // from: process.env.address_from,
             from: "drisskaci@gmail.com",
-            // to: process.env.address_to,
-            to: "drisskaci@gmail.com",
+            to: "drisskaci@outlook.fr",
             subject: "test",
             text: "test server Scrape PSG",
         };
