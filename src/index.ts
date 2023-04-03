@@ -81,12 +81,14 @@ async function checkForChanges(): Promise<void> {
         });
 
         const mailOptions = {
-            From: process.env.address_from,
-            to: process.env.address_to,
+            // from: process.env.address_from,
+            from: "drisskaci@gmail.com",
+            // to: process.env.address_to,
+            to: "drisskaci@gmail.com",
             subject: "test",
             text: "test server Scrape PSG",
         };
-        transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log("ERROR", error);
             } else {
