@@ -1,5 +1,5 @@
 import express, { Application, NextFunction, Request, Response } from "express";
-import nodemailer, { Transporter } from "nodemailer";
+import nodemailer from "nodemailer";
 import puppeteer from "puppeteer-extra";
 import RecaptchaPlugin from "puppeteer-extra-plugin-recaptcha";
 import { config } from "./config/config";
@@ -70,6 +70,30 @@ async function checkForChanges(): Promise<void> {
         })),
         console.log(data),
     ]);
+    if (data) {
+        // Nodemailer
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "drisskaci@gmail.com",
+                pass: config.mail.mdp,
+            },
+        });
+
+        const mailOptions = {
+            From: process.env.address_from,
+            to: process.env.address_to,
+            subject: "test",
+            text: "test server Scrape PSG",
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log("ERROR", error);
+            } else {
+                console.log("SUCCESS", info.response);
+            }
+        });
+    }
 
     await browser.close();
 }
