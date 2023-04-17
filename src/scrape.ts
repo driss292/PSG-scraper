@@ -8,7 +8,7 @@ import Logging from "./library/Logging";
 import express, { Request, Response, Application } from "express";
 // import fetch, { Response as FetchResponse } from "node-fetch";
 
-const { JSDOM } = require("jsdom");
+import { JSDOM } from "jsdom";
 const app: Application = express();
 app.use(express.json());
 
