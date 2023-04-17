@@ -98,7 +98,7 @@ async function checkForChanges(): Promise<void> {
     await browser.close();
 }
 
-setInterval(checkForChanges, 45000);
+setInterval(checkForChanges, 20000);
 
 app.listen(config.server.port, () => {
     Logging.info(`Server is running on port ${config.server.port}`);
