@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node build/index.js",
         "build": "tsc",
-        "dev": "nodemon src/scrape.ts"
+        "dev": "nodemon src/index.ts"
     },
     "keywords": [],
     "author": "",

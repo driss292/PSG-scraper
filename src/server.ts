@@ -31,7 +31,7 @@ function startServer() {
         let data;
 
         await page.waitForTimeout(2000);
-        await page.solveRecaptchas();
+        // await page.solveRecaptchas();
 
         await Promise.all([
             await page.waitForNavigation(),
@@ -83,4 +83,4 @@ function startServer() {
 setInterval(() => {
     console.log("Restarting server ...");
     startServer();
-}, 25000);
+}, 30000);

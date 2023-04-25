@@ -57,19 +57,27 @@ async function checkForChanges(): Promise<void> {
     let data;
 
     await page.waitForTimeout(2000);
-    await page.solveRecaptchas();
+    await page.click("button:nth-child(2)");
+    // await page.solveRecaptchas();
+    data = await page.evaluate(() => {
+        if (document.querySelector(".psgContLytMainInner > p") !== null) {
+            return document
+                .querySelector<HTMLElement>(".psgContLytMainInner > p")
+                ?.innerText.trim();
+        }
+    });
 
-    await Promise.all([
-        await page.waitForNavigation(),
-        (data = await page.evaluate(() => {
-            if (document.querySelector(".psgContLytMainInner > p") !== null) {
-                return document
-                    .querySelector<HTMLElement>(".psgContLytMainInner > p")
-                    ?.innerText.trim();
-            }
-        })),
-        console.log(data),
-    ]);
+    // await Promise.all([
+    //     await page.waitForNavigation(),
+    //     (data = await page.evaluate(() => {
+    //         if (document.querySelector(".psgContLytMainInner > p") !== null) {
+    //             return document
+    //                 .querySelector<HTMLElement>(".psgContLytMainInner > p")
+    //                 ?.innerText.trim();
+    //         }
+    //     })),
+    //     console.log(data),
+    // ]);
     if (data) {
         // Nodemailer
         const transporter = nodemailer.createTransport({
@@ -98,7 +106,7 @@ async function checkForChanges(): Promise<void> {
     await browser.close();
 }
 
-setInterval(checkForChanges, 20000);
+setInterval(checkForChanges, 30000);
 
 app.listen(config.server.port, () => {
     Logging.info(`Server is running on port ${config.server.port}`);
